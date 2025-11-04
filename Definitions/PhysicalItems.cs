@@ -1,4 +1,5 @@
-﻿using Sandbox.Definitions;
+﻿using ModAdjusterV2.Session;
+using Sandbox.Definitions;
 using Sandbox.Game.Entities;
 using Sandbox.Game.Weapons;
 using System;
@@ -112,8 +113,9 @@ namespace ModAdjusterV2.Definitions
 			if (Health.HasValue) def.Health = Health.Value;
 			if (DestroyedPieceId.HasValue) def.DestroyedPieceId = DestroyedPieceId.Value;
 			if (DestroyedPieces.HasValue) def.DestroyedPieces = DestroyedPieces.Value;
-			if (!string.IsNullOrEmpty(ExtraInventoryTooltipLine)) def.ExtraInventoryTooltipLine = new StringBuilder().Append(Environment.NewLine).Append(ExtraInventoryTooltipLine);
-			if (!string.IsNullOrEmpty(ExtraInventoryTooltipLineId)) def.ExtraInventoryTooltipLine = new StringBuilder().Append(Environment.NewLine).Append(MyTexts.Get(MyStringId.GetOrCompute(ExtraInventoryTooltipLineId)));
+			//Deprecated
+			//if (!string.IsNullOrEmpty(ExtraInventoryTooltipLine)) def.ExtraInventoryTooltipLine = new StringBuilder().Append(Environment.NewLine).Append(ExtraInventoryTooltipLine);
+			//if (!string.IsNullOrEmpty(ExtraInventoryTooltipLineId)) def.ExtraInventoryTooltipLine = new StringBuilder().Append(Environment.NewLine).Append(MyTexts.Get(MyStringId.GetOrCompute(ExtraInventoryTooltipLineId)));
 			if (MaxStackAmount.HasValue) def.MaxStackAmount = MaxStackAmount.Value;
 			if (MinimalPricePerUnit.HasValue) def.MinimalPricePerUnit = MinimalPricePerUnit.Value;
 			if (MinimumOfferAmount.HasValue) def.MinimumOfferAmount = MinimumOfferAmount.Value;
@@ -168,7 +170,11 @@ namespace ModAdjusterV2.Definitions
 
 			var def = definitionBase as MyComponentDefinition;
 
-			if (MaxIntegrity.HasValue) def.MaxIntegrity = MaxIntegrity.Value;
+			if (MaxIntegrity.HasValue && def.MaxIntegrity != MaxIntegrity.Value)
+			{
+                def.MaxIntegrity = MaxIntegrity.Value;
+				ModAdjuster._integrityComponents.Add(def.Id);
+            }
 			if (DropProbability.HasValue) def.DropProbability = DropProbability.Value;
 			if (DeconstructionEfficiency.HasValue) def.DeconstructionEfficiency = DeconstructionEfficiency.Value;
         }

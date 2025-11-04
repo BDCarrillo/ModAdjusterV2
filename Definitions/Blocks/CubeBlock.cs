@@ -98,8 +98,8 @@ namespace ModAdjusterV2.Definitions.Blocks
 
 		public bool? CompoundEnabled;
 
-		[XmlArrayItem("Definition")]
-		public MyObjectBuilder_CubeBlockDefinition.MySubBlockDefinition[] SubBlockDefinitions;
+		//[XmlArrayItem("Definition")]
+		//public MyObjectBuilder_CubeBlockDefinition.MySubBlockDefinition[] SubBlockDefinitions;
 
 		public string MultiBlock;
 
@@ -230,7 +230,7 @@ namespace ModAdjusterV2.Definitions.Blocks
 			if (SilenceableByShipSoundSystem.HasValue) def.SilenceableByShipSoundSystem = SilenceableByShipSoundSystem.Value;
 			if (EdgeType != null) def.EdgeType = EdgeType;
 			if (AutorotateMode.HasValue) def.AutorotateMode = AutorotateMode.Value;
-			if (!string.IsNullOrEmpty(MultiBlock)) def.MultiBlock = MultiBlock;
+			//if (!string.IsNullOrEmpty(MultiBlock)) def.MultiBlock = MultiBlock;
 			if (GuiVisible.HasValue) def.GuiVisible = GuiVisible.Value;
 
 			//def.Rotation = Rotation;
@@ -242,8 +242,8 @@ namespace ModAdjusterV2.Definitions.Blocks
 			if (!string.IsNullOrEmpty(BuildMaterial)) def.BuildMaterial = BuildMaterial.ToLower();
 			if (BuildProgressToPlaceGeneratedBlocks.HasValue) def.BuildProgressToPlaceGeneratedBlocks = BuildProgressToPlaceGeneratedBlocks.Value;
 			if (!string.IsNullOrEmpty(GeneratedBlockType)) def.GeneratedBlockType = MyStringId.GetOrCompute(GeneratedBlockType.ToLower());
-			if (CompoundEnabled.HasValue) def.CompoundEnabled = CompoundEnabled.Value;
-			if (CreateFracturedPieces.HasValue) def.CreateFracturedPieces = CreateFracturedPieces.Value;
+			//if (CompoundEnabled.HasValue) def.CompoundEnabled = CompoundEnabled.Value;
+			//if (CreateFracturedPieces.HasValue) def.CreateFracturedPieces = CreateFracturedPieces.Value;
 			if (!string.IsNullOrEmpty(EmissiveColorPreset)) def.EmissiveColorPreset = MyStringHash.GetOrCompute(EmissiveColorPreset);
 			if (VoxelPlacement.HasValue )def.VoxelPlacement = VoxelPlacement;
 			if (GeneralDamageMultiplier.HasValue) def.GeneralDamageMultiplier = GeneralDamageMultiplier.Value;
@@ -306,8 +306,8 @@ namespace ModAdjusterV2.Definitions.Blocks
 
 			if (EntityComponents != null) InitEntityComponents(EntityComponents, def);
 
-			if (CompoundTemplates != null && CompoundTemplates.Length > 0) def.CompoundTemplates = CompoundTemplates;
-
+			//if (CompoundTemplates != null && CompoundTemplates.Length > 0) def.CompoundTemplates = CompoundTemplates;
+			/*
 			if (SubBlockDefinitions != null)
 			{
 				def.SubBlockDefinitions = new Dictionary<string, MyDefinitionId>();
@@ -321,6 +321,7 @@ namespace ModAdjusterV2.Definitions.Blocks
 					}
 				}
 			}
+			*/
 
 			if (BlockVariants != null)
 			{
@@ -405,10 +406,7 @@ namespace ModAdjusterV2.Definitions.Blocks
 				var buildTime = BuildTimeSeconds ?? def.MaxIntegrity / def.IntegrityPointsPerSec;
                 def.MaxIntegrity = integrity;
 
-				if (!MyPerGameSettings.Destruction)
-				{
-					def.Mass = mass;
-				}
+				def.Mass = mass;
 
 				if (MaxIntegrity.HasValue) def.MaxIntegrity = MaxIntegrity.Value;
 

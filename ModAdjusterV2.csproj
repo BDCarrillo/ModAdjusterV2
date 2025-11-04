@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\AppData\Roaming\SpaceEngineers\Mods\ModAdjusterV2\Data\Scripts\Adjuster\</OutputPath>
+    <OutputPath>..\..\..\AppData\Roaming\SpaceEngineers\Mods\ModAdjusterV2Test\Data\Scripts\Adjuster\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -202,9 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\..\Documents\SE\SEWhitelistChecker.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
