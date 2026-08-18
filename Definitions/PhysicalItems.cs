@@ -77,11 +77,13 @@ namespace ModAdjusterV2.Definitions
 
 		public bool? CanPlayerOrder;
 
-		public int? MinimumAcquisitionAmount;
+        public int? MinimumAcquisitionAmount;
 
 		public int? MaximumAcquisitionAmount;
 
 		public string DestroySound;
+
+        public bool? DepositAllEnabled;
 
         public override void Load(MyDefinitionBase definitionBase, string path = null)
         {
@@ -126,6 +128,7 @@ namespace ModAdjusterV2.Definitions
 			if (MinimumAcquisitionAmount.HasValue) def.MinimumAcquisitionAmount = MinimumAcquisitionAmount.Value;
 			if (MaximumAcquisitionAmount.HasValue) def.MaximumAcquisitionAmount = MaximumAcquisitionAmount.Value;
 			if (!string.IsNullOrEmpty(DestroySound)) def.DestroySound = new MySoundPair(DestroySound, true);
+			if (DepositAllEnabled.HasValue) def.DepositAllEnabled = DepositAllEnabled.Value;
 		}
     }
 

@@ -633,7 +633,7 @@ namespace ModAdjusterV2.Definitions.Blocks
 
 		private void SetMountPoints(ref MyCubeBlockDefinition.MountPoint[] mountPoints, MyObjectBuilder_CubeBlockDefinition.MountPoint[] mpBuilders, List<MyObjectBuilder_CubeBlockDefinition.MountPoint> addedMounts, SerializableVector3I size)
 		{
-			if (mountPoints == null)
+			if (mountPoints == null || mountPoints.Length != mpBuilders.Length)
 			{
 				mountPoints = new MyCubeBlockDefinition.MountPoint[mpBuilders.Length];
 			}
