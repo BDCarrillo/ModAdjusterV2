@@ -1434,10 +1434,10 @@ namespace ModAdjusterV2.Definitions.Blocks
             if (InventoryFillFactorMax.HasValue) def.InventoryFillFactorMax = InventoryFillFactorMax.Value;
             if (FuelPullAmountFromConveyorInMinutes.HasValue) def.FuelPullAmountFromConveyorInMinutes = FuelPullAmountFromConveyorInMinutes.Value;
 
-            def.InventoryConstraint = new MyInventoryConstraint(string.Format(MyTexts.GetString(MySpaceTexts.ToolTipItemFilter_GenericProductionBlockInput), def.DisplayNameText), null, true);
-
             if (!FuelId.HasValue && (FuelInfos == null || FuelInfos.Count == 0))
                 return;
+
+            def.InventoryConstraint = new MyInventoryConstraint(string.Format(MyTexts.GetString(MySpaceTexts.ToolTipItemFilter_GenericProductionBlockInput), def.DisplayNameText), null, true);
 
             var list = FuelInfos ?? new List<MyObjectBuilder_FueledPowerProducerDefinition.FuelInfo>();
             if (list.Count == 0 && def.FuelInfos.Length > 0)
