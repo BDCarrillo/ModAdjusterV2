@@ -137,6 +137,13 @@ namespace ModAdjusterV2.Session
                     var def = rawDef as MyCubeBlockDefinition;
                     if (def == null || def.Components == null || def.Components.Length == 0)
                         continue;
+
+                    if (def.CriticalGroup > def.Components.Length - 1)
+                    {
+                        Logs.WriteLine($"Error with {def.Id}, CriticalGroup index ({def.CriticalGroup}) outside Components list length ({def.Components.Length})\n Check that the CriticalComponent is actually in the component list");
+                        continue;
+                    }
+
                     var update = false;
                     var ob = (MyObjectBuilder_CubeBlockDefinition)def.GetObjectBuilder();
                     float criticalIntegrity = 0f;
@@ -175,14 +182,6 @@ namespace ModAdjusterV2.Session
                             {
                                 model.BuildRatioUpperBound *= ratioChange;
                             }
-                        }
-                        if (false)//def.Id.SubtypeName == "LargeBlockArmorBlock" || def.Id.SubtypeName == "LargeBlockWeaponRack" || def.Id.SubtypeName == "ControlPanel")
-                        {
-                            foreach (var component in def.Components)
-                            {
-                                Logs.WriteLine($"{component.Definition.Id.SubtypeName} {component.Definition.MaxIntegrity} {component.Count}");
-                            }
-                            Logs.WriteLine($"{def.Id.SubtypeName} Crit Comp: {criticalComp.Definition.Id.SubtypeName} def crit group: {def.CriticalGroup} ob crit index: {ob.CriticalComponent.Index} Crit: {criticalIntegrity} Own: {ownershipIntegrity} Max: {def.MaxIntegrity}\n \n");
                         }
                         def.CriticalIntegrityRatio = newCriticalIntegrityRatio;
                         def.OwnershipIntegrityRatio = ownershipIntegrity / def.MaxIntegrity;
