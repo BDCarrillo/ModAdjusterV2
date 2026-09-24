@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using VRage.Game;
+using ModAdjusterV2.Session;
+using VRage.Utils;
 
 namespace ModAdjusterV2.Definitions
 {
@@ -37,14 +39,19 @@ namespace ModAdjusterV2.Definitions
 
 			if (Prerequisites != null)
             {
-				def.Prerequisites = new MyBlueprintDefinitionBase.Item[Prerequisites.Length];
+                var originalList = new List<MyStringHash>();
+                foreach (var originalDef in def.Prerequisites)
+                    originalList.Add(originalDef.Id.SubtypeId);
+                def.Prerequisites = new MyBlueprintDefinitionBase.Item[Prerequisites.Length];
 				for (int i = 0; i < def.Prerequisites.Length; i++)
 				{
 					def.Prerequisites[i] = MyBlueprintDefinitionBase.Item.FromObjectBuilder(Prerequisites[i]);
-				}
-			}
+                    if (!originalList.Contains(def.Prerequisites[i].Id.SubtypeId))
+                        ModAdjuster._alteredPrereqs.Add(def);
+                }
+            }
 
-			if (Result != null)
+            if (Result != null)
 			{
 				def.Results = new MyBlueprintDefinitionBase.Item[1];
 				def.Results[0] = MyBlueprintDefinitionBase.Item.FromObjectBuilder(Result);

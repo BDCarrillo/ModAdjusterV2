@@ -23,6 +23,8 @@ namespace ModAdjusterV2.Session
 
         private readonly HashSet<string> _clearedClasses = new HashSet<string>();
         public static HashSet<MyDefinitionId> _integrityComponents = new HashSet<MyDefinitionId>();
+        public static HashSet<MyBlueprintDefinition> _alteredPrereqs = new HashSet<MyBlueprintDefinition>();
+
 
         public override void LoadData()
         {
@@ -31,6 +33,8 @@ namespace ModAdjusterV2.Session
             LoadAdjusterDefs();
             if (_integrityComponents.Count > 0)
                 AdjustRatiosForModifiedComponent();
+            if (_alteredPrereqs.Count > 0)
+                AdjustInputConstraints();
         }
 
         public override void BeforeStart()
@@ -42,6 +46,7 @@ namespace ModAdjusterV2.Session
         {
             _clearedClasses.Clear();
             _integrityComponents.Clear();
+            _alteredPrereqs.Clear();
             Logs.Close();
         }
 
@@ -126,6 +131,24 @@ namespace ModAdjusterV2.Session
             
             ImportCategoryClasses(definitions.CategoryClasses, modPath);
             ImportClassEntries(definitions.BlueprintClassEntries);
+        }
+
+        private void AdjustInputConstraints()
+        {
+            foreach (var rawDef in MyDefinitionManager.Static.GetAllDefinitions())
+            {
+                if (rawDef is MyAssemblerDefinition)
+                {
+                    var aDef = rawDef as MyAssemblerDefinition;
+                    var inputConstraint = aDef.InputInventoryConstraint;
+                    foreach (var bpClass in aDef.BlueprintClasses)
+                        foreach (var bp in bpClass)
+                            if (_alteredPrereqs.Contains(bp))
+                                foreach (var prereq in bp.Prerequisites)
+                                    if (!inputConstraint.Check(prereq.Id))
+                                        inputConstraint.Add(prereq.Id);
+                }
+            }
         }
 
         private void AdjustRatiosForModifiedComponent()
