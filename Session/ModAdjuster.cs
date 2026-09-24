@@ -137,11 +137,11 @@ namespace ModAdjusterV2.Session
         {
             foreach (var rawDef in MyDefinitionManager.Static.GetAllDefinitions())
             {
-                if (rawDef is MyAssemblerDefinition)
+                if (rawDef is MyProductionBlockDefinition)
                 {
-                    var aDef = rawDef as MyAssemblerDefinition;
-                    var inputConstraint = aDef.InputInventoryConstraint;
-                    foreach (var bpClass in aDef.BlueprintClasses)
+                    var prodDef = rawDef as MyProductionBlockDefinition;
+                    var inputConstraint = prodDef.InputInventoryConstraint;
+                    foreach (var bpClass in prodDef.BlueprintClasses)
                         foreach (var bp in bpClass)
                             if (_alteredPrereqs.Contains(bp))
                                 foreach (var prereq in bp.Prerequisites)
