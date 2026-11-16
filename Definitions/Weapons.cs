@@ -98,7 +98,7 @@ namespace ModAdjusterV2.Definitions
 				{
 					var weaponEffect = Effects[i];
 					def.WeaponEffects[i] = new MyWeaponDefinition.MyWeaponEffect(weaponEffect.Action, weaponEffect.Dummy, weaponEffect.Particle, weaponEffect.Loop, weaponEffect.InstantStop, new Vector3(weaponEffect.OffsetX, weaponEffect.OffsetY, weaponEffect.OffsetZ), 
-						weaponEffect.ParticleBirthStart, weaponEffect.ParticleBirthMin, weaponEffect.ParticleBirthMax, weaponEffect.ParticleBirthIncrease, weaponEffect.ParticleBirthDecrease, weaponEffect.DisplayOnlyOnDummyFiring, weaponEffect.ParticleForIronsights);
+						weaponEffect.ParticleBirthStart, weaponEffect.ParticleBirthMin, weaponEffect.ParticleBirthMax, weaponEffect.ParticleBirthIncrease, weaponEffect.ParticleBirthDecrease, weaponEffect.DisplayOnlyOnDummyFiring, weaponEffect.ParticleForIronsights, weaponEffect.ParentToWeapon);
 				}
 			}
 			if (!string.IsNullOrEmpty(PhysicalMaterial)) def.PhysicalMaterial = MyStringHash.GetOrCompute(PhysicalMaterial);
