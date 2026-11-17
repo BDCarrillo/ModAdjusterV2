@@ -31,6 +31,8 @@ namespace ModAdjusterV2.Definitions
 
 		public int? Priority;
 
+        public bool? IgnoreEfficiencyMultiplier;
+
         public override void Load(MyDefinitionBase definitionBase, string path = null)
         {
             base.Load(definitionBase, path);
@@ -69,6 +71,7 @@ namespace ModAdjusterV2.Definitions
 			if (!string.IsNullOrEmpty(ProgressBarSoundCue)) def.ProgressBarSoundCue = ProgressBarSoundCue;
 			if (IsPrimary.HasValue) def.IsPrimary = IsPrimary.Value;
 			if (Priority.HasValue) def.Priority = Priority.Value;
+            if (IgnoreEfficiencyMultiplier.HasValue) def.IgnoreEfficiencyMultiplier = IgnoreEfficiencyMultiplier.Value;
 		}
     }
 
